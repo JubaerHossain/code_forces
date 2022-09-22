@@ -1,1 +1,3 @@
-#Code forces problem solving with c++
+# code_forces
+
+`Codeforces Problem solve with c++`
