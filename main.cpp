@@ -1,24 +1,20 @@
-#include <iostream>
-#include <string>
-using namespace std; 
+#include <bits/stdc++.h>
+using namespace std;
 
 int main()
 {
-    string s;
-    int n;
-    cin >> n;
-    for (int i = 0; i < n; i++)
-    {
-        cin >> s;
-        if (s.length() > 10)
-        {
-            cout << s[0] << s.length() - 2 << s[s.length() - 1] << endl;
-        }
-        else
-        {
-            cout << s << endl;
-        }
-    }
-    
+
+    int n, t, k;
+    cin >> n >> k >> t;
+    int m = n * k * t / 100;
+    int l = ((int)m) / k;
+    int res = (int)(m - l * k);
+    for (int i = 0; i < l; i++)
+        cout << k << " ";
+    if (l < n)
+        cout << res << " ";
+    for (int i = l + 1; i < n; i++)
+        cout << 0 << " ";
+
     return 0;
 }
