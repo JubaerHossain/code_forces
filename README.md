@@ -1,3 +1,3 @@
 # code_forces
 
-`Codeforces Problem solve with c++`
+`Code forces Problem solve with c++`
