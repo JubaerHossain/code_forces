@@ -1,5 +1,4 @@
 #include<bits/stdc++.h>
-using namespace std;
 #define ll long long
 #define ld long double
 ll M = 1000000007;
@@ -29,82 +28,55 @@ ll mul(ll a, ll b) {return (mod(mod(a)*mod(b)));}
 #define fast ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0)
 #define tc int test; cin>>test; while(test--)
 #define endl '\n'
- 
- 
+using namespace std;
+
 int main()
 {
     fast;
  
     tc
     {
-        ll n; cin>>n;
-        ll a[n]; get(a);
-        ll b[n]; get(b);
+        ll n,k; cin>>n>>k;
  
-        if(n==1)
+        ll a[k]; get(a);
+ 
+        if(k==1)
         {
-            cout<<b[0]<<endl; continue;
+            cout<<"Yes"<<endl; continue;
         }
  
-        //print(a); print(b);
+        ll last=a[1]-a[0]; 
  
-        vector<ll>v0, v1;
+        ll f=0;
  
-        for(ll i=0;i<n;i++)
+        for(int i=2;i<k;i++)
         {
-            if(a[i]==0) v0.pb(b[i]);
-            else v1.pb(b[i]);
-        }
- 
-        //print(v0); print(v1);
-        sort(all(v0));
-        sort(all(v1));
-        reverse(all(v0));
-        reverse(all(v1));
- 
-        if(v0.size()==v1.size())
-        {
-            ll ans=0;
- 
-            if(v0.back()<=v1.back())
+            if(a[i]-a[i-1] < last)
             {
-                ans+=v0.back();
-                for(auto i:v0) ans+=(2*i);
-                for(auto i:v1) ans+=(2*i);
-                ans-=(2*v0.back());
+                cout<<"No"<<endl;
+ 
+                f=1;
             }
  
-            else
-            {
-                ans+=v1.back();
-                for(auto i:v0) ans+=(2*i);
-                for(auto i:v1) ans+=(2*i);
-                ans-=(2*v1.back());
-            }
+            last=a[i]-a[i-1];
  
-            cout<<ans<<endl;
+            if(f==1) break;
         }
-        else if(v0.size()<v1.size())
-        {
-            //print(v0);
-            //print(v1);
-            ll ans=v1.back();
-            for(auto i:v0) ans+=(2*i); //see(ans);
-            ll p=v0.size();
-            for(ll i=0;i<p;i++) ans+=(2*v1[i]);
-            for(ll i=p;i<=v1.size()-2;i++) ans+=(v1[i]);
  
-            cout<<ans<<endl;
+        if(f==1) continue;
+ 
+        last=a[1]-a[0]; 
+ 
+        ll m=n-k+1;
+        m=m*last;
+ 
+        if(a[0]>m)
+        {
+            cout<<"No"<<endl;
         }
         else
         {
-            ll ans=v0.back();
-            for(auto i:v1) ans+=(2*i);
-            ll p=v1.size();
-            for(ll i=0;i<p;i++) ans+=(2*v0[i]);
-            for(ll i=p;i<=v0.size()-2;i++) ans+=(v0[i]);
- 
-            cout<<ans<<endl;
+            cout<<"Yes"<<endl;
         }
     }
 }
