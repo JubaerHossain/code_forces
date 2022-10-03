@@ -30,6 +30,7 @@ ll mul(ll a, ll b) {return (mod(mod(a)*mod(b)));}
 #define tc int test; cin>>test; while(test--)
 #define endl '\n'
  
+ 
 int main()
 {
     fast;
@@ -37,75 +38,74 @@ int main()
     tc
     {
         ll n; cin>>n;
- 
         ll a[n]; get(a);
+        ll b[n]; get(b);
  
-        ll mov=(n/2);
+        if(n==1)
+        {
+            cout<<b[0]<<endl; continue;
+        }
  
-        if(n%2!=0) mov++;
+        //print(a); print(b);
  
-        ll now=mov;
- 
-        ll even=0, odd=0;
+        vector<ll>v0, v1;
  
         for(ll i=0;i<n;i++)
         {
-            if(a[i]%2==0)
-            {
-                even++;
-            }
-            else
-            {
-                odd++;
-            }
+            if(a[i]==0) v0.pb(b[i]);
+            else v1.pb(b[i]);
         }
  
-        ll f=0;
+        //print(v0); print(v1);
+        sort(all(v0));
+        sort(all(v1));
+        reverse(all(v0));
+        reverse(all(v1));
  
-        while(1)
+        if(v0.size()==v1.size())
         {
-            if(now < 0)
+            ll ans=0;
+ 
+            if(v0.back()<=v1.back())
             {
-                cout<<"Bob";
- 
-                cout<<endl;
- 
-                f=1;
+                ans+=v0.back();
+                for(auto i:v0) ans+=(2*i);
+                for(auto i:v1) ans+=(2*i);
+                ans-=(2*v0.back());
             }
  
-            if(f==1) break;
- 
-            ll val1=now+now-1;
- 
-            ll val2=mov-now+mov-now;
- 
-            if(even>=val1 && odd>=val2)
+            else
             {
-                cout<<"Alice";
- 
-                cout<<endl;
- 
-                f=1;
+                ans+=v1.back();
+                for(auto i:v0) ans+=(2*i);
+                for(auto i:v1) ans+=(2*i);
+                ans-=(2*v1.back());
             }
  
-            if(f==1) break;
+            cout<<ans<<endl;
+        }
+        else if(v0.size()<v1.size())
+        {
+            //print(v0);
+            //print(v1);
+            ll ans=v1.back();
+            for(auto i:v0) ans+=(2*i); //see(ans);
+            ll p=v0.size();
+            for(ll i=0;i<p;i++) ans+=(2*v1[i]);
+            for(ll i=p;i<=v1.size()-2;i++) ans+=(v1[i]);
  
-            val1=now+now;
+            cout<<ans<<endl;
+        }
+        else
+        {
+            ll ans=v0.back();
+            for(auto i:v1) ans+=(2*i);
+            ll p=v1.size();
+            for(ll i=0;i<p;i++) ans+=(2*v0[i]);
+            for(ll i=p;i<=v0.size()-2;i++) ans+=(v0[i]);
  
-            val2=mov-now+mov-now-1;
- 
-            if(even>=val1 && odd>=val2)
-            {
-                cout<<"Alice";
- 
-                cout<<endl;
- 
-                f=1;
-            }
- 
-            if(f==1) break;
- 
-            now=now-2;
+            cout<<ans<<endl;
         }
     }
 }
+ 
