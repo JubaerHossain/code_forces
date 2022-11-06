@@ -1,40 +1,29 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-#define ll long long 
+int solve2(){
+  int n;
+  cin >> n;
+  long long  sum = 0;
+  for(int i = 0; i < n; i++){
+    long long x;
+    cin >> x;
+    sum += x;
+  }
+  cout << abs(sum) << endl;
+  return 0;
 
-void solve() {
-    int n, m, k;
-    string s, res = "";
-    cin >> n >> m >> s;
-    map<char, int> mp;
-    for(auto x: s) mp[x]++;
-    int cnt[26];
-    for(int i = 0; i < 26; i++) cnt[i] = 0; 
-    for(auto x: mp){
-      cnt[x.first - 'a'] = x.second;
-    }
-    k = m;
-    while(k--){
-      int flag = 1;
-      int j = 0;
-      int mx = min(n / m, 26);
-      for(int i = 0; i < mx; i++, j++){
-          if(cnt[i] == 0){
-            flag = 0;
-            break;
-          }
-          cnt[i]--;
-        }
-        (flag) ? res.push_back('a' + n / m) : res.push_back('a' + j);
-    }
-    cout << res << endl;
 }
-int main(){
-    ll t;
-    cin>>t;
-    while(t--){
-     
-    solve();
-    }
-    return 0;
+
+int main()
+{
+
+  vector<int> ans;
+  long long t;
+  cin >> t;
+  while (t--)
+  {
+    solve2();
+  }
+
+  return 0;
 }
